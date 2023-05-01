@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMotor : MonoBehaviour
@@ -41,7 +39,7 @@ public class PlayerMotor : MonoBehaviour
             }
         }
     }
-    
+
     public void ProcessMove(Vector2 input)
     {
         Vector3 moveDirection = Vector3.zero;
@@ -72,8 +70,8 @@ public class PlayerMotor : MonoBehaviour
     {
         sprinting = !sprinting;
         if (sprinting)
-            speed = 8;
+            speed = 6;
         else
-            speed = 5;
+            speed = 4;
     }
 }
