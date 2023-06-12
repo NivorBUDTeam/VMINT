@@ -1,8 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ellipsoid : Graph
+public class HyperbolicCylinder : Graph
 {
+    private void Start()
+    {
+        SurfaceName = "Гиперболческий цилиндр";
+    }
     protected override void Draw(int a, int b, int c, GameObject nodeObject)
     {
         var nodesToDraw = new List<Vector3>();

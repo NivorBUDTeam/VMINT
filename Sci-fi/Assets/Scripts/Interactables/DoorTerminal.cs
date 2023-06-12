@@ -1,22 +1,28 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class DoorTerminal : Interactable
 {
     [SerializeField] private GameObject inGameUI;
     [SerializeField] private GameObject terminalUI;
-    [SerializeField] private GameObject graph;
+    [SerializeField] private TextMeshProUGUI graphName;
+    [SerializeField] private RawImage graphImage;
+    [SerializeField] private Graph graph;
     [SerializeField] private TextMeshProUGUI aNum;
     [SerializeField] private TextMeshProUGUI bNum;
     [SerializeField] private TextMeshProUGUI cNum;
-    private Ellipsoid ellipsoid;
+    [SerializeField] private string nextScene;
     private int uA, uB, uC = 0;
-    private int a = 5;
-    private int b = 3;
-    private int c = 4;
+    private int a, b, c;
     void Start()
     {
-        ellipsoid = graph.GetComponent<Ellipsoid>();
+        graphName.text = graph.SurfaceName;
+        graphImage.texture = graph.equationFormula;
+        a = Random.Range(3, 5);
+        b = Random.Range(3, 5);
+        c = Random.Range(3, 5);
     }
 
     void Update()
@@ -46,8 +52,15 @@ public class DoorTerminal : Interactable
         bNum.text = uC.ToString();
         cNum.text = uB.ToString();
         ClearGraph();
-        ellipsoid.OriginalDraw(a, b, c);
-        ellipsoid.UserDraw(uA, uB, uC);
+        graph.OriginalDraw(a, b, c);
+        graph.UserDraw(uA, uB, uC);
+        if (a == uA && b == uB && c == uC)
+        {
+            Time.timeScale = 1f;
+            inGameUI.SetActive(true);
+            terminalUI.SetActive(false);
+            Invoke("LoadNextLevel", 1);
+        }
     }
 
     private int ChangeValue(int value, int delta) => (value + delta) < 0 || (value + delta) > 5 ? value : value + delta;
@@ -85,5 +98,10 @@ public class DoorTerminal : Interactable
     {
         uB = ChangeValue(uB, -1);
         DrawGraph();
+    }
+
+    private void LoadNextLevel()
+    {
+        SceneManager.LoadScene(nextScene);
     }
 }

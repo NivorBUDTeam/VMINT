@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class Graph : MonoBehaviour
 {
-    public string surfaceName;
-    public Sprite equationFormula;
+    public string SurfaceName { get; protected set; }
+    public Texture equationFormula;
     public GameObject originalGraphNode;
     public GameObject userGraphNode;
 
