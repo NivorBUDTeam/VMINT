@@ -6,6 +6,7 @@ using UnityEngine;
 public class DialogueManager : MonoBehaviour
 {
     private Queue<Phrase> phrases;
+    private GameObject interfaceToShow;
     public GameObject dialogueUI;
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText;
@@ -26,6 +27,7 @@ public class DialogueManager : MonoBehaviour
     {
         Time.timeScale = .0f;
         dialogueUI.SetActive(true);
+        interfaceToShow = dialogue.interfaceToShow;
 
         phrases.Clear();
 
@@ -65,5 +67,9 @@ public class DialogueManager : MonoBehaviour
     {
         Time.timeScale = 1.0f;
         dialogueUI.SetActive(false);
+        if (interfaceToShow != null)
+        {
+            interfaceToShow.SetActive(true);
+        }
     }
 }

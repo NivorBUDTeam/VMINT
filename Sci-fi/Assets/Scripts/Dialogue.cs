@@ -5,6 +5,7 @@ using UnityEngine;
 public class Dialogue
 {
     public Phrase[] phrases;
+    public GameObject interfaceToShow;
 }
 
 [System.Serializable]
