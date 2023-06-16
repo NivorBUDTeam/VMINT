@@ -27,7 +27,10 @@ public class DoorTerminal : Interactable
 
     void Update()
     {
-
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            Close();
+        }
     }
 
     protected override void Interact()
@@ -103,5 +106,12 @@ public class DoorTerminal : Interactable
     private void LoadNextLevel()
     {
         SceneManager.LoadScene(nextScene);
+    }
+
+    private void Close()
+    {
+        Time.timeScale = 1f;
+        terminalUI.SetActive(false);
+        inGameUI.SetActive(true);
     }
 }

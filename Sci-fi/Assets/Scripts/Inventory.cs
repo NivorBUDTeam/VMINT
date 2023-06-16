@@ -14,5 +14,5 @@ public class Inventory
 
     private static Inventory _instance;
 
-    public int ShotsCounter { get; private set; }
+    public int ShotsCounter { get; set; }
 }
