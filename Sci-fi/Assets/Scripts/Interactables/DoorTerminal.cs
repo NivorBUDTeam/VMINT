@@ -38,6 +38,7 @@ public class DoorTerminal : Interactable
     {
         inputManager.SwitchActionMap();
         Time.timeScale = 0f;
+        Cursor.visible = true;
         inGameUI.SetActive(false);
         terminalUI.SetActive(true);
         DrawGraph();
@@ -111,6 +112,7 @@ public class DoorTerminal : Interactable
     private void Close()
     {
         Time.timeScale = 1f;
+        Cursor.visible = false;
         terminalUI.SetActive(false);
         inGameUI.SetActive(true);
         inputManager.SwitchActionMap();

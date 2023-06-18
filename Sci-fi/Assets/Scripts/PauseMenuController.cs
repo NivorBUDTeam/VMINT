@@ -17,12 +17,14 @@ public class PauseMenuController : MonoBehaviour
     private void Show()
     {
         Time.timeScale = 0f;
+        Cursor.visible = true;
         pauseUI.SetActive(true);
     }
 
     private void Close()
     {
         Time.timeScale = 1f;
+        Cursor.visible = false;
         pauseUI.SetActive(false);
     }
 
@@ -33,7 +35,8 @@ public class PauseMenuController : MonoBehaviour
 
     public void ReturnToMenu()
     {
-        Close();
+        Time.timeScale = 1f;
+        pauseUI.SetActive(false);
         SceneManager.LoadScene("Menu");
     }
 }

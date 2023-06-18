@@ -39,6 +39,7 @@ public class CraftManager : MonoBehaviour
     public void Show()
     {
         Time.timeScale = 0f;
+        Cursor.visible = true;
         craftUI.SetActive(true);
         SetAbilitiesButtonsInactive();
         inputManager.SwitchActionMap();
@@ -47,6 +48,7 @@ public class CraftManager : MonoBehaviour
     private void Close()
     {
         Time.timeScale = 1f;
+        Cursor.visible = false;
         craftUI.SetActive(false);
         taskField.SetActive(false);
         inputManager.SwitchActionMap();
