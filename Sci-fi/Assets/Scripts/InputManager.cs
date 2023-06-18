@@ -4,6 +4,7 @@ public class InputManager : MonoBehaviour
 {
     private PlayerInput playerInput;
     public PlayerInput.OnFootActions OnFoot;
+    public PlayerInput.UIActions UI;
     private PlayerMotor motor;
     private PlayerLook look;
 
@@ -11,6 +12,7 @@ public class InputManager : MonoBehaviour
     {
         playerInput = new PlayerInput();
         OnFoot = playerInput.OnFoot;
+        UI = playerInput.UI;
 
         motor = GetComponent<PlayerMotor>();
         look = GetComponent<PlayerLook>();
@@ -19,6 +21,20 @@ public class InputManager : MonoBehaviour
 
         OnFoot.Crounch.performed += ctx => motor.Crouch();
         OnFoot.Sprint.performed += ctx => motor.Sprint();
+    }
+
+    public void SwitchActionMap()
+    {
+        if (OnFoot.enabled)
+        {
+            OnFoot.Disable();
+            UI.Enable();
+        }
+        else
+        {
+            OnFoot.Enable();
+            UI.Disable();
+        }
     }
 
     void FixedUpdate()

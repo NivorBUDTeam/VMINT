@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
@@ -30,7 +31,11 @@ public class PlayerHealth : MonoBehaviour
         if (overlay.color.a > 0)
         {
             if (health < 30)
+            {
+                if (health <= 0)
+                    RestartLevel();
                 return;
+            }
             durationTimer += Time.deltaTime;
             if (durationTimer > duration)
             {
@@ -72,11 +77,17 @@ public class PlayerHealth : MonoBehaviour
         lerpTimer = 0f;
         durationTimer = 0f;
         overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 1);
+
     }
 
     public void RestoreHealth(float healAmount)
     {
         health += healAmount;
         lerpTimer = 0f;
+    }
+
+    private void RestartLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

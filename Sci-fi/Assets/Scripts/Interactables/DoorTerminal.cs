@@ -14,6 +14,7 @@ public class DoorTerminal : Interactable
     [SerializeField] private TextMeshProUGUI bNum;
     [SerializeField] private TextMeshProUGUI cNum;
     [SerializeField] private string nextScene;
+    [SerializeField] private InputManager inputManager;
     private int uA, uB, uC = 0;
     private int a, b, c;
     void Start()
@@ -27,7 +28,7 @@ public class DoorTerminal : Interactable
 
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Escape))
+        if (inputManager.UI.Exit.triggered && terminalUI.activeSelf)
         {
             Close();
         }
@@ -35,6 +36,7 @@ public class DoorTerminal : Interactable
 
     protected override void Interact()
     {
+        inputManager.SwitchActionMap();
         Time.timeScale = 0f;
         inGameUI.SetActive(false);
         terminalUI.SetActive(true);
@@ -59,9 +61,7 @@ public class DoorTerminal : Interactable
         graph.UserDraw(uA, uB, uC);
         if (a == uA && b == uB && c == uC)
         {
-            Time.timeScale = 1f;
-            inGameUI.SetActive(true);
-            terminalUI.SetActive(false);
+            Close();
             Invoke("LoadNextLevel", 1);
         }
     }
@@ -113,5 +113,6 @@ public class DoorTerminal : Interactable
         Time.timeScale = 1f;
         terminalUI.SetActive(false);
         inGameUI.SetActive(true);
+        inputManager.SwitchActionMap();
     }
 }

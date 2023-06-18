@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class DialogueManager : MonoBehaviour
 {
+    [SerializeField] private InputManager inputManager;
     private Queue<Phrase> phrases;
     private GameObject interfaceToShow;
     public GameObject dialogueUI;
@@ -17,7 +18,7 @@ public class DialogueManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && dialogueUI.activeSelf)
+        if (inputManager.UI.Click.WasReleasedThisFrame() && dialogueUI.activeSelf)
         {
             DisplayNextSentence();
         }
@@ -25,6 +26,7 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
+        inputManager.SwitchActionMap();
         Time.timeScale = .0f;
         dialogueUI.SetActive(true);
         interfaceToShow = dialogue.interfaceToShow;
@@ -65,6 +67,7 @@ public class DialogueManager : MonoBehaviour
 
     void EndDialogue()
     {
+        inputManager.SwitchActionMap();
         Time.timeScale = 1.0f;
         dialogueUI.SetActive(false);
         if (interfaceToShow != null)

@@ -15,6 +15,7 @@ public class CraftManager : MonoBehaviour
     [SerializeField] private Button buttonC;
     [SerializeField] private TextMeshProUGUI textC;
     [SerializeField] private GameObject shotButton;
+    [SerializeField] private InputManager inputManager;
     private GameObject[] abilitiesButtons;
     private CraftModel model;
 
@@ -29,7 +30,7 @@ public class CraftManager : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Escape))
+        if (inputManager.UI.Exit.triggered && craftUI.activeSelf)
         {
             Close();
         }
@@ -40,6 +41,7 @@ public class CraftManager : MonoBehaviour
         Time.timeScale = 0f;
         craftUI.SetActive(true);
         SetAbilitiesButtonsInactive();
+        inputManager.SwitchActionMap();
     }
 
     private void Close()
@@ -47,6 +49,7 @@ public class CraftManager : MonoBehaviour
         Time.timeScale = 1f;
         craftUI.SetActive(false);
         taskField.SetActive(false);
+        inputManager.SwitchActionMap();
     }
 
     public void ShowTask(CraftTask task, Answer[] answers)
